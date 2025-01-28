@@ -16,8 +16,18 @@
     * git branch -M main
     * git push -u origin main
 
-You can test through:
+You can test through (if using unittest):
 if test structure is single file...
 * python -m unittest tests.py
 if folder structure...
 * "python -m unittest discover -s tests" or for specific test "python -m unittest tests.test_app"
+
+You can test through (if using django):
+* python manage.py test
+
+Knowledge gaps:
+* Iterating through tuples, lists and dictionaries
+* for loops
+* while loops
+* Testing validation of data being stored in a model
+* Different assertions that can be made
