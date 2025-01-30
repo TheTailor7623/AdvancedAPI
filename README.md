@@ -26,6 +26,7 @@ You can test through (if using django):
 * python manage.py test
 
 Knowledge gaps:
+* Pros and Cons of tuples, lists and dictionaries
 * Iterating through tuples, lists and dictionaries
 * for loops
 * while loops

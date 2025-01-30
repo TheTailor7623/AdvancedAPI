@@ -13,7 +13,7 @@ class Kata2Test(TestCase):
     """This class will test the kata 2 file"""
     def setUp(self):
         """This setUp function will setUp tests with data to be used"""
-        pass
+        self.systemUnderTest = kata2.fizzBuzz
 
     def tearDown(self):
         """
@@ -22,54 +22,70 @@ class Kata2Test(TestCase):
         """
         pass
 
-    def test_input_3_result_fizz(self):
-        """This function tests that given an input of 1 the result is 1"""
-        # Arrange
-        input = 3
-        expected = "Fizz"
-        systemUnderTest = kata2.fizzBuzz
+    def test_input_divisible_by_3_returns_fizz(self):
+        """Tests that any input divisible by 3 returns Fizz'"""
+        test_cases = [
+            (3, "Fizz"),
+            (6, "Fizz"),
+            (9, "Fizz"),
+        ]
 
-        # Act
-        actual = systemUnderTest(input)
+        for input, expected in test_cases:
+            with self.subTest(input):
+                result = self.systemUnderTest(input)
+                self.assertEqual(
+                    result,
+                    expected,
+                    f"Failed for input: {input}, expected: {expected}, got: {result}"
+                )
 
-        # Assert
-        self.assertEqual(actual, expected)
+    def test_input_divisible_by_5_returns_buzz(self):
+        """Tests that any input divisible by 5 returns Buzz"""
+        test_cases = [
+            (5, "Buzz"),
+            (10, "Buzz"),
+            (20, "Buzz"),
+        ]
 
-    def test_input_6_result_fizz(self):
-        """This function tests that given an input of 1 the result is 1"""
-        # Arrange
-        input = 6
-        expected = "Fizz"
-        systemUnderTest = kata2.fizzBuzz
+        for input, expected in test_cases:
+            with self.subTest(input):
+                result = self.systemUnderTest(input)
+                self.assertEqual(
+                    result,
+                    expected,
+                    f"Failed for input: {input}, expected: {expected}, got: {result}"
+                )
 
-        # Act
-        actual = systemUnderTest(input)
+    def test_input_divisible_by_3_and_5_returns_FizzBuzz(self):
+        """Tests that any input divisible by 3 and 5 returns fizzbuzz"""
+        test_cases = [
+            (15, "FizzBuzz"),
+            (30, "FizzBuzz"),
+            (75, "FizzBuzz"),
+        ]
 
-        # Assert
-        self.assertEqual(actual, expected)
+        for input, expected in test_cases:
+            with self.subTest(input):
+                result = self.systemUnderTest(input)
+                self.assertEqual(
+                    result,
+                    expected,
+                    f"Failed for input: {input}, expected: {expected}, got: {result}"
+                )
 
-    def test_input_9_result_fizz(self):
-        """This function tests that given an input of 1 the result is 1"""
-        # Arrange
-        input = 9
-        expected = "Fizz"
-        systemUnderTest = kata2.fizzBuzz
+    def test_input_not_divisible_by_3_or_5_returns_input_number(self):
+        """Tests that any input not divisible by 3 or 5 returns the input number"""
+        test_cases = [
+            (1,1),
+            (2,2),
+            (4,4),
+        ]
 
-        # Act
-        actual = systemUnderTest(input)
-
-        # Assert
-        self.assertEqual(actual, expected)
-
-    def test_input_5_result_buzz(self):
-        """This function tests that given an input of 1 the result is 1"""
-        # Arrange
-        input = 5
-        expected = "Buzz"
-        systemUnderTest = kata2.fizzBuzz
-
-        # Act
-        actual = systemUnderTest(input)
-
-        # Assert
-        self.assertEqual(actual, expected)
+        for input, expected in test_cases:
+            with self.subTest(input):
+                result = self.systemUnderTest(input)
+                self.assertEqual(
+                    result,
+                    expected,
+                    f"Failed for input: {input}, expected: {expected}, got: {result}"
+                )
