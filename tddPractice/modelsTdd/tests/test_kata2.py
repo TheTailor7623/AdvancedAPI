@@ -24,53 +24,59 @@ class Kata2Test(TestCase):
 
     def test_input_divisible_by_3_returns_fizz(self):
         """Tests that any input divisible by 3 returns Fizz'"""
-        test_cases = [
-            (3, "Fizz"),
-            (6, "Fizz"),
-            (9, "Fizz"),
-        ]
+        test_cases = (3, 6, 9)
 
-        for input, expected in test_cases:
+        for input in test_cases:
             with self.subTest(input):
-                result = self.systemUnderTest(input)
+                # Arrange
+                expected = "Fizz"
+
+                # Act
+                actual = self.systemUnderTest(input)
+
+                # Assert
                 self.assertEqual(
-                    result,
+                    actual,
                     expected,
-                    f"Failed for input: {input}, expected: {expected}, got: {result}"
+                    f"Failed for input: {input}, expected: {expected}, got: {actual}"
                 )
 
     def test_input_divisible_by_5_returns_buzz(self):
         """Tests that any input divisible by 5 returns Buzz"""
-        test_cases = [
-            (5, "Buzz"),
-            (10, "Buzz"),
-            (20, "Buzz"),
-        ]
+        test_cases = (5, 10, 20)
 
-        for input, expected in test_cases:
+        for input in test_cases:
             with self.subTest(input):
-                result = self.systemUnderTest(input)
+                # Arrange
+                expected = "Buzz"
+
+                # Act
+                actual = self.systemUnderTest(input)
+
+                # Assert
                 self.assertEqual(
-                    result,
+                    actual,
                     expected,
-                    f"Failed for input: {input}, expected: {expected}, got: {result}"
+                    f"Failed for input: {input}, expected: {expected}, got: {actual}"
                 )
 
     def test_input_divisible_by_3_and_5_returns_FizzBuzz(self):
         """Tests that any input divisible by 3 and 5 returns fizzbuzz"""
-        test_cases = [
-            (15, "FizzBuzz"),
-            (30, "FizzBuzz"),
-            (75, "FizzBuzz"),
-        ]
+        test_cases = (15, 30, 75)
 
-        for input, expected in test_cases:
+        for input in test_cases:
             with self.subTest(input):
-                result = self.systemUnderTest(input)
+                # Arrange
+                expected = "FizzBuzz"
+
+                # Act
+                actual = self.systemUnderTest(input)
+
+                # Assert
                 self.assertEqual(
-                    result,
+                    actual,
                     expected,
-                    f"Failed for input: {input}, expected: {expected}, got: {result}"
+                    f"Failed for input: {input}, expected: {expected}, got: {actual}"
                 )
 
     def test_input_not_divisible_by_3_or_5_returns_input_number(self):
@@ -83,9 +89,12 @@ class Kata2Test(TestCase):
 
         for input, expected in test_cases:
             with self.subTest(input):
-                result = self.systemUnderTest(input)
+                # Act
+                actual = self.systemUnderTest(input)
+
+                # Assert
                 self.assertEqual(
-                    result,
+                    actual,
                     expected,
-                    f"Failed for input: {input}, expected: {expected}, got: {result}"
+                    f"Failed for input: {input}, expected: {expected}, got: {actual}"
                 )
