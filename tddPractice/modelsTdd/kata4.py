@@ -10,7 +10,11 @@ def add(numbersToAdd):
     if len(numbersToAdd) == 0:
         return 0
     elif ("," in numbersToAdd):
-        number1 = numbersToAdd.split(",")[0]
-        number2 = numbersToAdd.split(",")[1]
-        return int(number1) + int(number2)
+        stringList = numbersToAdd.split(",")
+        total = 0
+        for stringNumber in stringList:
+            integerNumber = int(stringNumber)
+            total = total + integerNumber
+        return total
+
     return int(numbersToAdd)

@@ -23,11 +23,6 @@ TDD GEARS
 
 - Reverse gear (Red, Red, Reverse!, Lower gear)
     - Backout green bar pattern
-
-1. Create a simple String calculator with the signature: function add(input: string): number
-    1.1. The method can take 0, 1 or 2 numbers, and will return their sum (for an empty string it
-    will return 0) for example “” or “1” or “1,2”
-    1.2. Start with the simplest test case of an empty string, then move to one and two numbers
 """
 
 class Kata4AddFunctionTest(TestCase):
@@ -95,3 +90,36 @@ class Kata4AddFunctionTest(TestCase):
                 # Assert
                 self.assertEqual(actual, expected, f"Input: {input}, Expected: {expected}, Actual: {actual}")
 
+    def test_Function_Handles_An_Unknown_Amount_Of_Inputs(self):
+        """Tests that the add function within the kata4 file can handle an unknown number of inputs"""
+        # Arrange
+        test_cases = [
+            ("1, 2, 3", 6),
+            ("10, 2, 300", 312),
+            ("700, 40, 3000", 3740),
+            ("8000, 200, 70000", 78200),
+            ("10000, 6000, 900000", 916000),
+        ]
+
+        systemUnderTest = kata4.add
+
+        for input, expected in test_cases:
+            with self.subTest(input=input, expected=expected):
+                actual = systemUnderTest(input)
+                self.assertEqual(actual, expected)
+
+class learningTest(TestCase):
+    def test_LearningTestAdd(self):
+        # Arrange
+        input = "1,2,3"
+        expected = 6
+
+        # Act
+        actual = input.split(",")
+        result = 0
+        for stringNumber in actual:
+            integerNumber = int(stringNumber)
+            result = result + integerNumber
+
+        # Assert
+        self.assertEqual(result, expected)
