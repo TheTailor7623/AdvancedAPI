@@ -7,14 +7,19 @@ def add(numbersToAdd):
     Output:
     - Sum of the numbers
     """
+
     if len(numbersToAdd) == 0:
         return 0
-    elif ("," in numbersToAdd):
-        stringList = numbersToAdd.split(",")
+    elif ("\n" in numbersToAdd) or ("," in numbersToAdd) or (" " in numbersToAdd):
+        noLineBreak = numbersToAdd.replace("\n", " ")
+        onlyWhitespace = noLineBreak.replace(",", " ")
+        cleanedList = list(onlyWhitespace.split(" "))
+        while "" in cleanedList:
+            cleanedList.remove("")
         total = 0
-        for stringNumber in stringList:
+        for stringNumber in cleanedList:
             integerNumber = int(stringNumber)
-            total = total + integerNumber
+            total += integerNumber
+        print(f"Input: {numbersToAdd} | Removed line breaks: {noLineBreak} | Removed commas: {onlyWhitespace} | cleanedList: {cleanedList}")
         return total
-
     return int(numbersToAdd)
