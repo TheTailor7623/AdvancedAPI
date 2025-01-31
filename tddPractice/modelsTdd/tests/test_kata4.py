@@ -53,27 +53,16 @@ class Kata4AddFunctionTest(TestCase):
         # Assert
         self.assertEqual(actual, expected)
 
-    # def test_one_string_input(self):
-    #     # Arrange
-    #     input = "1"
-    #     expected = 1
-    #     systemUnderTest = kata4.add
-
-    #     # Act
-    #     actual = systemUnderTest(input)
-
-    #     # Assert
-    #     self.assertEqual(actual, expected)
-
     def test_one_string_inputs(self):
+        """Tests that given a one string input the add function returns their equivalent integer"""
         # Arrange
         test_cases = [
             ("0", 0),
-            ("1", 1),
-            ("4", 4),
-            ("5", 5),
-            ("8", 8),
-            ("9", 9),
+            ("10", 10),
+            ("400", 400),
+            ("5000", 5000),
+            ("80000", 80000),
+            ("900000", 900000),
         ]
         systemUnderTest = kata4.add
 
@@ -85,15 +74,24 @@ class Kata4AddFunctionTest(TestCase):
                 # Assert
                 self.assertEqual(actual, expected, f"Input: {input}, Expected: {expected}, Actual: {actual}")
 
-
-    def test_two_string_input(self):
+    def test_two_string_inputs(self):
+        """Tests that given two string inputs the add function returns their sum in integer form"""
         # Arrange
-        input = "1,2"
-        expected = 3
+        test_cases = [
+            ("0,10", 10),
+            ("10,400", 410),
+            ("400,5000", 5400),
+            ("5000,80000", 85000),
+            ("80000,900000", 980000),
+            ("900000,1000000", 1900000),
+        ]
         systemUnderTest = kata4.add
 
-        # Act
-        actual = systemUnderTest(input)
+        for input, expected in test_cases:
+            with self.subTest(input = input):
+                # Act
+                actual = systemUnderTest(input)
 
-        # Assert
-        self.assertEqual(actual, expected)
+                # Assert
+                self.assertEqual(actual, expected, f"Input: {input}, Expected: {expected}, Actual: {actual}")
+
