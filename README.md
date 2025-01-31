@@ -24,6 +24,8 @@ if folder structure...
 
 You can test through (if using django):
 * python manage.py test
+or
+* python manage.py test app_name.tests.test_name.class_name.test_function_name
 
 Knowledge gaps:
 * Pros and Cons of tuples, lists and dictionaries

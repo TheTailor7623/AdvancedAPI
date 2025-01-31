@@ -47,7 +47,7 @@ class Kata4AddFunctionTest(TestCase):
         # Assert
         self.assertEqual(actual, expected)
 
-    def test_input_with_1_string_number(self):
+    def test_inputs_with_1_string_number(self):
         """Tests that given a one string input the add function returns their equivalent integer"""
         # Arrange
         test_cases = [
@@ -67,7 +67,7 @@ class Kata4AddFunctionTest(TestCase):
                 # Assert
                 self.assertEqual(actual, expected, f"Input: {input}, Expected: {expected}, Actual: {actual}")
 
-    def test_input_with_2_string_numbers(self):
+    def test_inputs_with_2_string_numbers(self):
         """Tests that given two string inputs the add function returns their sum in integer form"""
         # Arrange
         test_cases = [
@@ -87,7 +87,7 @@ class Kata4AddFunctionTest(TestCase):
                 # Assert
                 self.assertEqual(actual, expected, f"Input: {input}, Expected: {expected}, Actual: {actual}")
 
-    def test_input_with_unknown_number_of_string_numbers(self):
+    def test_inputs_with_unknown_number_of_string_numbers(self):
         """Tests that the add function within the kata4 file can handle an unknown number of inputs"""
         # Arrange
         test_cases = [
@@ -103,100 +103,70 @@ class Kata4AddFunctionTest(TestCase):
                 actual = self.systemUnderTest(input)
                 self.assertEqual(actual, expected)
 
-    def test_input_with_line_breaks(self):
+    def test_inputs_with_commas(self):
+        """Tests inputs to the add function in the kata4 file with commas"""
+        # Arrange
+        test_cases = [
+            ("1,20,300", 321),
+            ("30,400,5000", 5430),
+            ("50,6000,7", 6057),
+            ("7000,800,90000", 97800),
+        ]
+        for input, expected in test_cases:
+            with self.subTest(input=input,expected=expected):
+                # Act
+                actual = self.systemUnderTest(input)
+
+                # Assert
+                self.assertEqual(actual, expected)
+
+    def test_inputs_with_line_breaks(self):
         """Tests inputs to the add function in the kata4 file with line breaks"""
         # Arrange
-        input = "10\n20\n30"
-        expected = 60
-        # Act
-        actual = self.systemUnderTest(input)
-        # Assert
-        self.assertEqual(actual, expected)
+        test_cases = [
+            ("1\n20\n300", 321),
+            ("30\n400\n5000", 5430),
+            ("50\n6000\n7", 6057),
+            ("7000\n800\n90000", 97800),
+        ]
+        for input, expected in test_cases:
+            with self.subTest(input=input,expected=expected):
+                # Act
+                actual = self.systemUnderTest(input)
 
-    def test_input_with_line_breaks_commas_and_whitespace(self):
+                # Assert
+                self.assertEqual(actual, expected)
+
+    def test_inputs_with_whitespaces(self):
+        """Tests inputs to the add function in the kata4 file with whitespaces"""
+        # Arrange
+        test_cases = [
+            ("1 20 300", 321),
+            ("30 400  5000", 5430),
+            ("50  6000 7", 6057),
+            ("7000   800  90000", 97800),
+        ]
+        for input, expected in test_cases:
+            with self.subTest(input=input,expected=expected):
+                # Act
+                actual = self.systemUnderTest(input)
+
+                # Assert
+                self.assertEqual(actual, expected)
+
+    def test_inputs_with_line_breaks_commas_and_whitespaces(self):
         """Tests inputs to the add function in the kata4 file with line breaks, commas and whitespace"""
         # Arrange
-        input = "10\n20,30 40"
-        expected = 100
-        # Act
-        actual = self.systemUnderTest(input)
-        # Assert
-        self.assertEqual(actual, expected)
+        test_cases = [
+            ("10\n20,30 40", 100),
+            ("30\n400   5000,70000", 75430),
+            ("50 6000,7\n40000", 46057),
+            ("7000\n800,90000  100000", 197800),
+        ]
+        for input, expected in test_cases:
+            with self.subTest(input=input,expected=expected):
+                # Act
+                actual = self.systemUnderTest(input)
 
-# class LearningTestGreenBarPattern(TestCase):
-#     """This class is allowing me to practice and get familiar with handling text"""
-
-#     def test_handling_spaces_in_text1(self):
-#         """Test for normal empty spaces"""
-#         input = "1 2 3"
-#         expected = ["1", "2", "3"]
-#         stringNumberList = input.split(" ")
-
-#         self.assertEqual(stringNumberList, expected)
-
-#     def test_handling_spaces_in_text2(self):
-#         """
-#         Test for "/n" empty spaces
-
-#         Notes:
-#         - You can refactor by creating a helper function that deals with whitespace
-#         since the same process is used in both /n and whitespace handling
-#         """
-#         input = "1 \n 2 \n 3"
-#         expected = ["1","2","3"]
-#         stringNumberList = input.split("\n")
-#         stringNumberListNoSpaces = []
-#         for stringNumber in stringNumberList:
-#             stringNumber = stringNumber.replace(" ","")
-#             stringNumberListNoSpaces.append(stringNumber)
-
-#         self.assertEqual(stringNumberListNoSpaces, expected)
-
-#     def test_handling_spaces_in_text3(self):
-#         """Test for "/n" and normal empty spaces"""
-#         input = "1 2 \n 3"
-#         expected = ["1", "2", "3"]
-#         replaceWhitespaceWithComma = input.replace("\n", "")
-#         # print(f"First list: {replaceWhitespaceWithComma}")
-#         final = []
-#         for number in replaceWhitespaceWithComma:
-#             final.append(number)
-#         while (" " in final):
-#             final.remove(" ")
-#         # print(f"Final: {final}")
-#         self.assertEqual(final, expected)
-
-#     def test_handling_spaces_in_text4(self):
-#         """Test for "," "/n" and " " kind of spaces"""
-#         input = "1, 2 \n 3"
-#         expected = ["1", "2", "3"]
-#         replaceWhitespaceWithComma = input.replace("\n", "")
-#         replaceCommas = replaceWhitespaceWithComma.replace(",","")
-#         # print(f"First list: {replaceWhitespaceWithComma}")
-#         final = []
-#         for number in replaceCommas:
-#             final.append(number)
-#         while (" " in final):
-#             final.remove(" ")
-#         # print(f"Final: {final}")
-#         self.assertEqual(final, expected)
-
-#     def test_implementation(self):
-#         """Test implementation for "/n" and normal empty spaces"""
-#         input = "1, 2\n3"
-#         expected = 6
-#         replaceLineBreak = input.replace("\n", "")
-#         replaceCommas = replaceLineBreak.replace(",","")
-#         # print(f"Before adding to list: {replaceCommas}")
-#         final = []
-#         total = 0
-#         for number in replaceCommas:
-#             final.append(number)
-#         # print(f"Before removing whitespace: {final}")
-#         while (" " in final):
-#             final.remove(" ")
-#         # print(f"Final: {final}")
-#         for number in final:
-#             number = int(number)
-#             total += number
-#         self.assertEqual(total, expected)
+                # Assert
+                self.assertEqual(actual, expected)
