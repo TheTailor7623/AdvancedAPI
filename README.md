@@ -28,9 +28,13 @@ or
 * python manage.py test app_name.tests.test_name.class_name.test_function_name
 
 Knowledge gaps:
-* Pros and Cons of tuples, lists and dictionaries
+* Tuples
+* Lists
+* Dictionaries
 * Iterating through tuples, lists and dictionaries
 * for loops
 * while loops
 * Testing validation of data being stored in a model
 * Different assertions that can be made
+* List comprehensions and filtering data
+* Data manipulation (string, integer etc... but mainly string)

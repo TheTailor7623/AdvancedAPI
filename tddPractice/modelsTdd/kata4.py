@@ -18,41 +18,32 @@ def add(numbersToAdd):
         Output:
         - Sum of data
         """
-        if customDelimiter == None:
+        if customDelimiter is None:
             noLineBreak = numbersToAdd.replace("\n", " ")
             onlyWhitespace = noLineBreak.replace(",", " ")
             cleanedList = list(onlyWhitespace.split(" "))
-            while "" in cleanedList:
-                cleanedList.remove("")
-            total = 0
-            for stringNumber in cleanedList:
-                integerNumber = int(stringNumber)
-                total += integerNumber
-            # print(f"Input: {numbersToAdd} | Removed line breaks: {noLineBreak} | Removed commas: {onlyWhitespace} | cleanedList: {cleanedList}")
-            return total
+        else:
+            delimiters = [" ", "\n", ",", customDelimiter]
+            for delimiter in delimiters:
+                numbersToAdd = numbersToAdd.replace(delimiter, " ")
+            cleanedList = list(numbersToAdd.split(" "))
 
-        # print(f"Input: {numbersToAdd}")
-        listToClean = numbersToAdd
-        itemsToClean = [" ", "\n", ",", customDelimiter]
-        cleanedList = [number for number in listToClean if number not in itemsToClean]
+        cleanedList = [num.strip() for num in cleanedList if num.strip()]
 
-        total = 0
-        for stringNumber in cleanedList:
-            integerNumber = int(stringNumber)
-            total += integerNumber
-        # print(f"Cleaned List: {cleanedList}")
-        return total
+        # Check for negatives
+        negatives = [num for num in cleanedList if num.startswith("-")]
+
+        if negatives:
+            # print(f"Negative numbers are not allowed: {', '.join(negatives)}")
+            raise ValueError(f"Negative numbers are not allowed: {', '.join(negatives)}")
+
+        return sum(int(num) for num in cleanedList if int(num) <= 1000)
 
     if len(numbersToAdd) == 0:
         return 0
-    elif("//" in numbersToAdd):
-        listOfCharacters = []
-        for character in numbersToAdd:
-            listOfCharacters.append(character)
-        customDelimiter = listOfCharacters[2]
-        listOfCharacters = listOfCharacters[4:]
-        return helperSumMethod(listOfCharacters, customDelimiter)
-
-    elif ("\n" in numbersToAdd) or ("," in numbersToAdd) or (" " in numbersToAdd):
+    elif numbersToAdd.startswith("//"):
+        customDelimiter = numbersToAdd[2]
+        numbersToAdd = numbersToAdd[4:]
+        return helperSumMethod(numbersToAdd, customDelimiter)
+    else:
         return helperSumMethod(numbersToAdd, None)
-    return int(numbersToAdd)

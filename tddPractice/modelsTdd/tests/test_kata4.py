@@ -45,18 +45,15 @@ class Kata4AddFunctionTest(TestCase):
         actual = self.systemUnderTest(input)
 
         # Assert
-        self.assertEqual(actual, expected)
+        self.assertEqual(actual, expected, f"Input: {input}, Expected: {expected}, Actual: {actual}")
 
-    def test_inputs_with_1_string_number(self):
+    def test_1_string_number_inputs(self):
         """Tests that given a one string input the add function returns their equivalent integer"""
         # Arrange
         test_cases = [
             ("0", 0),
             ("10", 10),
             ("400", 400),
-            ("5000", 5000),
-            ("80000", 80000),
-            ("900000", 900000),
         ]
 
         for input, expected in test_cases:
@@ -67,16 +64,13 @@ class Kata4AddFunctionTest(TestCase):
                 # Assert
                 self.assertEqual(actual, expected, f"Input: {input}, Expected: {expected}, Actual: {actual}")
 
-    def test_inputs_with_2_string_numbers(self):
+    def test_2_string_number_inputs(self):
         """Tests that given two string inputs the add function returns their sum in integer form"""
         # Arrange
         test_cases = [
             ("0,10", 10),
             ("10,400", 410),
-            ("400,5000", 5400),
-            ("5000,80000", 85000),
-            ("80000,900000", 980000),
-            ("900000,1000000", 1900000),
+            ("400,800", 1200),
         ]
 
         for input, expected in test_cases:
@@ -93,24 +87,21 @@ class Kata4AddFunctionTest(TestCase):
         test_cases = [
             ("1, 2, 3", 6),
             ("10, 2, 300", 312),
-            ("700, 40, 3000", 3740),
-            ("8000, 200, 70000", 78200),
-            ("10000, 6000, 900000", 916000),
+            ("700, 40, 300", 1040),
         ]
 
         for input, expected in test_cases:
             with self.subTest(input=input, expected=expected):
                 actual = self.systemUnderTest(input)
-                self.assertEqual(actual, expected)
+                self.assertEqual(actual, expected, f"Input: {input}, Expected: {expected}, Actual: {actual}")
 
     def test_inputs_with_commas(self):
         """Tests inputs to the add function in the kata4 file with commas"""
         # Arrange
         test_cases = [
             ("1,20,300", 321),
-            ("30,400,5000", 5430),
-            ("50,6000,7", 6057),
-            ("7000,800,90000", 97800),
+            ("30,400,600", 1030),
+            ("50,900,7", 957),
         ]
         for input, expected in test_cases:
             with self.subTest(input=input,expected=expected):
@@ -118,16 +109,16 @@ class Kata4AddFunctionTest(TestCase):
                 actual = self.systemUnderTest(input)
 
                 # Assert
-                self.assertEqual(actual, expected)
+                self.assertEqual(actual, expected, f"Input: {input}, Expected: {expected}, Actual: {actual}")
 
     def test_inputs_with_line_breaks(self):
         """Tests inputs to the add function in the kata4 file with line breaks"""
         # Arrange
         test_cases = [
             ("1\n20\n300", 321),
-            ("30\n400\n5000", 5430),
-            ("50\n6000\n7", 6057),
-            ("7000\n800\n90000", 97800),
+            ("30\n400\n500", 930),
+            ("50\n800\n7", 857),
+            ("300\n800\n900", 2000),
         ]
         for input, expected in test_cases:
             with self.subTest(input=input,expected=expected):
@@ -135,16 +126,16 @@ class Kata4AddFunctionTest(TestCase):
                 actual = self.systemUnderTest(input)
 
                 # Assert
-                self.assertEqual(actual, expected)
+                self.assertEqual(actual, expected, f"Input: {input}, Expected: {expected}, Actual: {actual}")
 
     def test_inputs_with_whitespaces(self):
         """Tests inputs to the add function in the kata4 file with whitespaces"""
         # Arrange
         test_cases = [
             ("1 20 300", 321),
-            ("30 400  5000", 5430),
-            ("50  6000 7", 6057),
-            ("7000   800  90000", 97800),
+            ("30 400  500", 930),
+            ("50  600 7", 657),
+            ("700   800  900", 2400),
         ]
         for input, expected in test_cases:
             with self.subTest(input=input,expected=expected):
@@ -152,16 +143,16 @@ class Kata4AddFunctionTest(TestCase):
                 actual = self.systemUnderTest(input)
 
                 # Assert
-                self.assertEqual(actual, expected)
+                self.assertEqual(actual, expected, f"Input: {input}, Expected: {expected}, Actual: {actual}")
 
     def test_inputs_with_line_breaks_commas_and_whitespaces(self):
         """Tests inputs to the add function in the kata4 file with line breaks, commas and whitespace"""
         # Arrange
         test_cases = [
             ("10\n20,30 40", 100),
-            ("30\n400   5000,70000", 75430),
-            ("50 6000,7\n40000", 46057),
-            ("7000\n800,90000  100000", 197800),
+            ("30\n400   500,700", 1630),
+            ("50 600,7\n400", 1057),
+            ("700\n800,900  100", 2500),
         ]
         for input, expected in test_cases:
             with self.subTest(input=input,expected=expected):
@@ -169,7 +160,7 @@ class Kata4AddFunctionTest(TestCase):
                 actual = self.systemUnderTest(input)
 
                 # Assert
-                self.assertEqual(actual, expected)
+                self.assertEqual(actual, expected, f"Input: {input}, Expected: {expected}, Actual: {actual}")
 
     def test_input_with_custom_delimiter(self):
         """Tests that a user can enter a custom delimiter to use other then defaults(" " and "," and "/n")"""
@@ -187,4 +178,40 @@ class Kata4AddFunctionTest(TestCase):
                 # Act
                 actual = self.systemUnderTest(input)
                 # Assert
-                self.assertEqual(actual, expected)
+                self.assertEqual(actual, expected, f"Input: {input}, Expected: {expected}, Actual: {actual}")
+
+    def test_negative_number_inputs(self):
+        """Tests that the function can handle negative number inputs correctly"""
+        # Arrange
+        test_cases = [
+            ("1,2,3,-5"),
+            ("1,2,3,-50"),
+            ("1,-1,3,50"),
+            ("2,2,-2,2"),
+            ("8,5,3,-200"),
+        ]
+
+        expected = ValueError
+
+        for input in test_cases:
+            with self.subTest(input=input, expected=expected):
+                with self.assertRaises(expected):
+                    self.systemUnderTest(input)
+
+    def test_numbers_greater_than_1000(self):
+        """Tests that numbers greater than 1000 are ignored in the sum"""
+        # Arrange
+        test_cases = [
+            ("2,1001", 2),
+            ("1000,1", 1001),
+            ("500,1001,500", 1000),
+            ("2000,3000,5", 5),
+        ]
+
+        for input, expected in test_cases:
+            with self.subTest(input=input):
+                # Act
+                actual = self.systemUnderTest(input)
+
+                # Assert
+                self.assertEqual(actual, expected, f"Input: {input}, Expected: {expected}, Actual: {actual}")
