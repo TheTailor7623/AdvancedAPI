@@ -38,3 +38,13 @@ Knowledge gaps:
 * Different assertions that can be made
 * List comprehensions and filtering data
 * Data manipulation (string, integer etc... but mainly string)
+
+REST FRAMEWORK NOTES:
+* Creating a user model
+    * AbstractBaseUser and PermissionsMixin are what the user model is based on
+    * Create model field
+    * set is_active, is_staff and is_superuser
+    * Link to appropriate manager
+* Create manager for user model
+    * create_user function
+    * create_superuser function
