@@ -7,8 +7,17 @@ def add(numbersToAdd):
     Output:
     - Sum of the numbers
     """
-
     def helperSumMethod(numbersToAdd, customDelimiter):
+        """
+        This method cleans and sums the data given
+
+        Inputs:
+        - numbersToAdd (string of numbers to add in correct format)
+        - customDelimiter (Enter custom delimiter for use or None if there aren't any)
+
+        Output:
+        - Sum of data
+        """
         if customDelimiter == None:
             noLineBreak = numbersToAdd.replace("\n", " ")
             onlyWhitespace = noLineBreak.replace(",", " ")
@@ -24,19 +33,14 @@ def add(numbersToAdd):
 
         # print(f"Input: {numbersToAdd}")
         listToClean = numbersToAdd
-        while " " in listToClean:
-            listToClean.remove(" ")
-        while "\n" in listToClean:
-            listToClean.remove("\n")
-        while "," in listToClean:
-            listToClean.remove(",")
-        while customDelimiter in listToClean:
-            listToClean.remove(customDelimiter)
+        itemsToClean = [" ", "\n", ",", customDelimiter]
+        cleanedList = [number for number in listToClean if number not in itemsToClean]
+
         total = 0
-        for stringNumber in listToClean:
+        for stringNumber in cleanedList:
             integerNumber = int(stringNumber)
             total += integerNumber
-        # print(f"Cleaned List: {listToClean}")
+        # print(f"Cleaned List: {cleanedList}")
         return total
 
     if len(numbersToAdd) == 0:

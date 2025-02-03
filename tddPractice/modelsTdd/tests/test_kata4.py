@@ -171,39 +171,20 @@ class Kata4AddFunctionTest(TestCase):
                 # Assert
                 self.assertEqual(actual, expected)
 
-    # //{delimiter}\n
     def test_input_with_custom_delimiter(self):
         """Tests that a user can enter a custom delimiter to use other then defaults(" " and "," and "/n")"""
         # Arrange
-        input = "//x\n1x2"
-        expected = 3
+        test_cases = [
+            ("//x\n1x2", 3),
+            ("//j\n1j2", 3),
+            ("//A\n1A2A4", 7),
+            ("//;\n1;2;3;4", 10),
+            ("//|\n1|2|3|4|5", 15),
+        ]
 
-        # Act
-        actual = self.systemUnderTest(input)
-
-        # Assert
-        self.assertEqual(actual, expected)
-
-    def test_input_with_custom_delimiter2(self):
-        """Tests that a user can enter a custom delimiter to use other then defaults(" " and "," and "/n")"""
-        # Arrange
-        input = "//;\n1;2;3;4"
-        expected = 10
-
-        # Act
-        actual = self.systemUnderTest(input)
-
-        # Assert
-        self.assertEqual(actual, expected)
-
-    def test_input_with_custom_delimiter3(self):
-        """Tests that a user can enter a custom delimiter to use other then defaults(" " and "," and "/n")"""
-        # Arrange
-        input = "//|\n1|2|3|4|5"
-        expected = 15
-
-        # Act
-        actual = self.systemUnderTest(input)
-
-        # Assert
-        self.assertEqual(actual, expected)
+        for input, expected in test_cases:
+            with self.subTest(input = input, expexted = expected):
+                # Act
+                actual = self.systemUnderTest(input)
+                # Assert
+                self.assertEqual(actual, expected)
