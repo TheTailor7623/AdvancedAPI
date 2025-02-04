@@ -1,27 +1,27 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
-# Create your models here.
 class UserProfileManager(BaseUserManager):
     """Manager for user profiles"""
 
-    def create_user(self, email, name, password=None):
+    def create_user(self, email, name, surname, password=None):
         """Create a new user profile"""
         if not email:
-            raise ValueError(f"Users must enter an email")
+            raise ValueError("Users must enter an email")
+
         email = self.normalize_email(email)
-        user = self.model(email=email, name=name)
+        user = self.model(email=email, name=name, surname=surname)
         user.set_password(password)
         user.save(using=self._db)
 
         return user
 
-    def create_superuser(self, email, name, password):
-        """Create a new superuser"""
-        user = self.create_user(email, name, password)
+    def create_superuser(self, email, name, surname, password):
+        """Create and return a superuser"""
+        user = self.create_user(email, name, surname, password)
         user.is_superuser = True
         user.is_staff = True
-        user.save(using=self.db)
+        user.save(using=self._db)
 
         return user
 
@@ -38,11 +38,11 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     objects = UserProfileManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["name"]
+    REQUIRED_FIELDS = ["name", "surname"]
 
     def get_full_name(self):
         """Retrieve full name of user"""
-        return self.name
+        return f"{self.name} {self.surname}"
 
     def __str__(self):
         """Return string representation of our user"""

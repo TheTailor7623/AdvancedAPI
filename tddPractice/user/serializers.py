@@ -2,11 +2,11 @@ from rest_framework import serializers
 
 from modelsTdd import models
 
-class UserProfileSerializer(serializers.ModelSerializer):
-    """Serializes a user profile object"""
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    """Handling serialization of user registration"""
     class Meta:
         model = models.UserProfile
-        fields = ("id","email","name","password")
+        fields = ("id", "email", "name", "surname", "password")
         extra_kwargs = {
             "password":{
                 "write_only":True,
@@ -15,7 +15,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        """Create and return a new user"""
+        """Tells the serializer how to create a user"""
         user = models.UserProfile.objects.create_user(**validated_data)
         return user
 
@@ -26,3 +26,10 @@ class UserProfileSerializer(serializers.ModelSerializer):
             instance.set_password(password)
 
         return super().update(instance, validated_data)
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    """Serializer for viewing user profile"""
+
+    class Meta:
+        model = models.UserProfile
+        fields=["id","name", "surname", "email"]
